@@ -75,7 +75,7 @@ use strict;
 
 use Authen::Passphrase 0.003;
 use Carp qw(croak);
-use Data::Entropy::Algorithms 0.000 qw(rand_bits);
+use Crypt::PRNG 0.000 qw(random_bytes);
 use Digest 1.00;
 use MIME::Base64 2.21 qw(encode_base64 decode_base64);
 use Module::Runtime 0.011 qw(is_valid_module_name use_module);
@@ -186,7 +186,7 @@ sub new {
 				if exists $self->{salt};
 			croak "\"$value\" is not a valid salt length"
 				unless $value == int($value) && $value >= 0;
-			$self->{salt} = rand_bits($value * 8);
+			$self->{salt} = random_bytes($value);
 		} elsif($attr eq "hash") {
 			croak "hash specified redundantly"
 				if exists($self->{hash}) ||

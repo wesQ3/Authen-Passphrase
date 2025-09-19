@@ -85,7 +85,7 @@ use strict;
 use Authen::Passphrase 0.003;
 use Carp qw(croak);
 use Crypt::PasswdMD5 1.0 qw(unix_md5_crypt);
-use Data::Entropy::Algorithms 0.000 qw(rand_int);
+use Crypt::PRNG 0.000 qw(irand);
 
 our $VERSION = "0.008";
 
@@ -147,7 +147,7 @@ sub new {
 				if exists $self->{salt};
 			$self->{salt} = "";
 			for(my $i = 8; $i--; ) {
-				$self->{salt} .= chr(rand_int(64));
+				$self->{salt} .= chr(irand() % (64));
 			}
 			$self->{salt} =~ tr#\x00-\x3f#./0-9A-Za-z#;
 		} elsif($attr eq "hash_base64") {

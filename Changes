@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+  * Data::Entropy is deprecated. Migrate to Crypt::PRNG (Mathieu Arnold)
   
   * documentation fixes, update BlowfishCrypt syopsis cost:
     RT#129767 RT#82137
