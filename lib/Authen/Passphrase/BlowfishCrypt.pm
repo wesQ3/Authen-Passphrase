@@ -8,12 +8,12 @@ Unix crypt()
 	use Authen::Passphrase::BlowfishCrypt;
 
 	$ppr = Authen::Passphrase::BlowfishCrypt->new(
-		cost => 8,
+		cost => 14,
 		salt => "sodium__chloride",
 		hash_base64 => "BPZijhMHLvPeNMHd6XwZyNamOXVBTPi");
 
 	$ppr = Authen::Passphrase::BlowfishCrypt->new(
-		cost => 8, salt_random => 1,
+		cost => 14, salt_random => 1,
 		passphrase => "passphrase");
 
 	$ppr = Authen::Passphrase::BlowfishCrypt->from_crypt(
@@ -124,7 +124,8 @@ is to be preferred.  Default true.
 
 =item B<cost>
 
-Base-two logarithm of the number of keying rounds to perform.
+Base-two logarithm of the number of keying rounds to perform. A cost value of
+at least 14 is strongly recommended.
 
 =item B<keying_nrounds_log2>
 
