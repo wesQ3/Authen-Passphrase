@@ -1,3 +1,7 @@
+{{$NEXT}}
+
+  * Data::Entropy is deprecated. Migrate to Crypt::PRNG (Mathieu Arnold)
+  
 version 0.008; 2012-02-04
 
   * bugfix: avoid passing magic variables $1 et al into functions where

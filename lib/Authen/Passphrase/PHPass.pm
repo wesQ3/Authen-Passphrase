@@ -66,7 +66,7 @@ use strict;
 
 use Authen::Passphrase 0.003;
 use Carp qw(croak);
-use Data::Entropy::Algorithms 0.000 qw(rand_bits);
+use Crypt::PRNG 0.000 qw(random_bytes);
 use Digest::MD5 1.99_53 ();
 
 our $VERSION = "0.008";
@@ -201,7 +201,7 @@ sub new {
 		} elsif($attr eq "salt_random") {
 			croak "salt specified redundantly"
 				if exists $self->{salt};
-			$self->{salt} = _en_base64(rand_bits(48));
+			$self->{salt} = _en_base64(random_bytes(6));
 		} elsif($attr eq "hash") {
 			croak "hash specified redundantly"
 				if exists($self->{hash}) ||

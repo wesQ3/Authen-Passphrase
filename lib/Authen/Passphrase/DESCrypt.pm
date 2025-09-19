@@ -127,7 +127,7 @@ use Crypt::UnixCrypt_XS 0.08 qw(
 	base64_to_int24 int24_to_base64
 	base64_to_int12 int12_to_base64
 );
-use Data::Entropy::Algorithms 0.000 qw(rand_int);
+use Crypt::PRNG 0.000 qw(irand);
 
 our $VERSION = "0.008";
 
@@ -260,7 +260,7 @@ sub new {
 				if exists $self->{salt};
 			croak "\"$value\" is not a valid salt size"
 				unless $value == 12 || $value == 24;
-			$self->{salt} = rand_int(1 << $value);
+			$self->{salt} = irand() % (1 << $value);
 		} elsif($attr eq "hash") {
 			croak "hash specified redundantly"
 				if exists($self->{hash}) ||
