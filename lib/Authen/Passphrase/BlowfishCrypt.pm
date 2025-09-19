@@ -98,7 +98,7 @@ use strict;
 use Authen::Passphrase 0.003;
 use Carp qw(croak);
 use Crypt::Eksblowfish::Bcrypt 0.008 qw(bcrypt_hash en_base64 de_base64);
-use Data::Entropy::Algorithms 0.000 qw(rand_bits);
+use Crypt::PRNG 0.000 qw(random_bytes);
 
 our $VERSION = "0.008";
 
@@ -195,7 +195,7 @@ sub new {
 		} elsif($attr eq "salt_random") {
 			croak "salt specified redundantly"
 				if exists $self->{salt};
-			$self->{salt} = rand_bits(128);
+			$self->{salt} = random_bytes(16);
 		} elsif($attr eq "hash") {
 			croak "hash specified redundantly"
 				if exists($self->{hash}) ||

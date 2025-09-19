@@ -88,7 +88,7 @@ requires:
   Crypt::MySQL: 0.03
   Crypt::PasswdMD5: 1.0
   Crypt::UnixCrypt_XS: 0.08
-  Data::Entropy::Algorithms: 0
+  Crypt::PRNG: 0
   Digest: 1.00
   Digest::MD4: 1.2
   Digest::MD5: 1.9953

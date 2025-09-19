@@ -73,7 +73,7 @@ use Authen::Passphrase 0.003;
 use Authen::Passphrase::DESCrypt;
 use Carp qw(croak);
 use Crypt::UnixCrypt_XS 0.08 qw(base64_to_block base64_to_int12);
-use Data::Entropy::Algorithms 0.000 qw(rand_int);
+use Crypt::PRNG 0.000 qw(irand);
 
 our $VERSION = "0.008";
 
@@ -150,7 +150,7 @@ sub new {
 				if defined $salt;
 			croak "\"$value\" is not a valid salt size"
 				unless $value == 12;
-			$salt = rand_int(1 << $value);
+			$salt = irand() % (1 << $value);
 		} elsif($attr eq "hash") {
 			croak "hash specified redundantly"
 				if @hashes || defined($passphrase);
