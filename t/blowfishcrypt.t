@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 103;
+use Test::More tests => 110;
 
 BEGIN { use_ok "Authen::Passphrase::BlowfishCrypt"; }
 
@@ -68,6 +68,28 @@ ok $ppr->key_nul;
 is $ppr->cost, 8;
 is $ppr->salt_base64, "s5VYb9QzBzTUE3h66kH6hO";
 is $ppr->hash_base64, "QJjrUXrZskQrnTq0SOwFkM0sRsvuzqC";
+
+# $2y$ support (same as $2a$)
+$ppr = Authen::Passphrase::BlowfishCrypt
+	->from_crypt('$2y$08$s5VYb9QzBzTUE3h66kH6hOQ'.
+		     'JjrUXrZskQrnTq0SOwFkM0sRsvuzqC');
+ok $ppr;
+ok $ppr->key_nul;
+is $ppr->cost, 8;
+is $ppr->salt_base64, 's5VYb9QzBzTUE3h66kH6hO';
+is $ppr->hash_base64, 'QJjrUXrZskQrnTq0SOwFkM0sRsvuzqC';
+
+$ppr = Authen::Passphrase::BlowfishCrypt
+	->from_rfc2307('{CRYPT}$2y$08$s5VYb9QzBzTUE3h66kH6hOQ'.
+		     'JjrUXrZskQrnTq0SOwFkM0sRsvuzqC');
+ok $ppr->key_nul;
+
+# Base class dispatch to ensure Authen::Passphrase->from_crypt works
+use Authen::Passphrase;
+my $base = Authen::Passphrase
+	->from_crypt('$2y$08$s5VYb9QzBzTUE3h66kH6hOQ'.
+		     'JjrUXrZskQrnTq0SOwFkM0sRsvuzqC');
+ok $base->isa('Authen::Passphrase::BlowfishCrypt'), 'Base class from_crypt returns BlowfishCrypt for $2y$';
 
 my %pprs;
 while(<DATA>) {
