@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+  * support $2y$ crypt format for ::BlowfishCrypt, RT#133259 (Wes Malone)
+
   * Data::Entropy is deprecated. Migrate to Crypt::PRNG (Mathieu Arnold)
   
   * documentation fixes, update BlowfishCrypt syopsis cost:
