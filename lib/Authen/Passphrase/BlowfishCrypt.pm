@@ -230,17 +230,18 @@ sub new {
 
 Generates a new passphrase recogniser object using the Blowfish-based
 crypt() algorithm, from a crypt string.  The crypt string must start with
-"B<$2$>" for the version that does not append NUL to the key, or "B<$2a$>"
-for the version that does.  The next two characters must be decimal digits
-giving the cost parameter.  This must be followed by "B<$>", 22 base 64
-digits giving the salt, and finally 31 base 64 digits giving the hash.
+"B<$2$>" for the version that does not append NUL to the key, or either
+"B<$2a$>" or "B<$2y$>" for the version that does.  The next two characters
+must be decimal digits giving the cost parameter.  This must be followed by
+"B<$>", 22 base 64 digits giving the salt, and finally 31 base 64 digits
+giving the hash.  "$2y$" is treated as an alias of "$2a$".
 
 =cut
 
 sub from_crypt {
 	my($class, $passwd) = @_;
-	if($passwd =~ /\A(\$2a?\$)/) {
-		$passwd =~ m#\A\$2(a?)\$([0-9]{2})\$
+	if($passwd =~ /\A(\$2[ay]?\$)/) {
+		$passwd =~ m#\A\$2([ay]?)\$([0-9]{2})\$
 				([./A-Za-z0-9]{22})([./A-Za-z0-9]{31})\z#x
 			or croak "malformed $1 data";
 		my($kn, $cost, $salt, $hash) = ($1, $2, $3, $4);
