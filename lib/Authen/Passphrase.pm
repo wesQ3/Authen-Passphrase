@@ -173,9 +173,12 @@ L<Authen::Passphrase::MD5Crypt>.
 
 =item B<$2y$>
 
+=item B<$2b$>
+
 Two versions of a passphrase scheme based on Blowfish,
-designed by Niels Provos and David Mazieres for OpenBSD.  "$2y$" is
-treated as an alias of "$2a$".  See L<Authen::Passphrase::BlowfishCrypt>.
+designed by Niels Provos and David Mazieres for OpenBSD.  "$2y$" and
+"$2b$" are treated as aliases of "$2a$" (no functional difference within
+this distribution).  See L<Authen::Passphrase::BlowfishCrypt>.
 
 =item B<$3$>
 
@@ -275,6 +278,7 @@ my %crypt_scheme_handler = (
 	"1"    => [ "Authen::Passphrase::MD5Crypt", 0.003 ],
 	"2"    => [ "Authen::Passphrase::BlowfishCrypt", 0.007 ],
 	"2a"   => [ "Authen::Passphrase::BlowfishCrypt", 0.007 ],
+	"2b"   => [ "Authen::Passphrase::BlowfishCrypt", 0.007 ],
 	"2y"   => [ "Authen::Passphrase::BlowfishCrypt", 0.007 ],
 	"3"    => [ "Authen::Passphrase::NTHash", 0.003 ],
 	"IPB2" => sub($) { croak '$IPB2$ is unimplemented' },
