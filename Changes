@@ -1,6 +1,6 @@
 {{$NEXT}}
 
-  * support $2y$ crypt format for ::BlowfishCrypt, RT#133259 (Wes Malone)
+  * support $2y$ & $2b$ crypt formats for ::BlowfishCrypt, RT#133259 (Wes Malone)
 
   * Data::Entropy is deprecated. Migrate to Crypt::PRNG (Mathieu Arnold)
   
