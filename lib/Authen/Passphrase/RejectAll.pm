@@ -21,10 +21,9 @@ Authen::Passphrase::RejectAll - reject all passphrases
 
 =head1 DESCRIPTION
 
-An object of this class is a passphrase recogniser that accepts any
-passphrase whatsoever.  This is a subclass of L<Authen::Passphrase>, and
-this document assumes that the reader is familiar with the documentation
-for that class.
+An object of this class is a passphrase recogniser that rejects all inputs.
+This is a subclass of L<Authen::Passphrase>, and this document assumes that the
+reader is familiar with the documentation for that class.
 
 This type of passphrase recogniser is obviously of no use at all in
 controlling access to any resource.  Its use is to permit a resource
